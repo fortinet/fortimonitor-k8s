@@ -1,0 +1,17 @@
+# Default values for panopta.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+customer_key: your-server-key-123
+
+aggregator_url: aggregator2.panopta.com
+
+onsightImage:
+  repository: panopta/onsight-vcollector
+  tag: kubernetes
+  pullPolicy: Always
+
+agentImage:
+  repository: panopta/agent
+  tag: kubernetes
+  pullPolicy: Always

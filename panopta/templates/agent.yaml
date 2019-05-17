@@ -1,0 +1,60 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  labels:
+    name: {{ .Chart.Name }}-agent
+  name: {{ .Chart.Name }}-agent
+  namespace: default
+spec:
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      name: {{ .Chart.Name }}-agent
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        name: {{ .Chart.Name }}-agent
+    spec:
+      containers:
+      - image: "{{ .Values.agentImage.repository }}:{{ .Values.agentImage.tag }}"
+        imagePullPolicy: {{ .Values.agentImage.pullPolicy }}
+        name: {{ .Chart.Name }}-agent
+        resources:
+          limits:
+            memory: 200Mi
+        volumeMounts:
+        - mountPath: /run/docker.sock
+          name: rundocker
+        - mountPath: /host/proc
+          name: proc
+        - mountPath: /host/sys/fs/cgroup
+          name: sysfscgroup
+        envFrom:
+        - configMapRef:
+            name: {{ .Chart.Name }}-configmap
+        env:
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: AGGREGATOR_URL
+          value: '{{ .Chart.Name }}-agent-proxy:8443'
+      volumes:
+      - hostPath:
+          path: /run/docker.sock
+          type: ""
+        name: rundocker
+      - hostPath:
+          path: /proc
+          type: ""
+        name: proc
+      - hostPath:
+          path: /sys/fs/cgroup
+          type: ""
+        name: sysfscgroup
+      serviceAccountName: {{ .Chart.Name }}-serviceaccount
+  updateStrategy:
+    rollingUpdate:
+      maxUnavailable: 1
+    type: RollingUpdate

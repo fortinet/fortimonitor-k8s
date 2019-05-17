@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Chart.Name }}-onsight-pv-claim
+  labels:
+    app: {{ .Chart.Name }}-onsight
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-onsight
+  labels:
+    app: {{ .Chart.Name }}-osight
+spec:
+  selector:
+     matchLabels:
+        app: {{ .Chart.Name }}-onsight
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}-onsight
+    spec:
+      containers:
+      - image: "{{ .Values.onsightImage.repository }}:{{ .Values.onsightImage.tag }}"
+        imagePullPolicy: {{ .Values.onsightImage.pullPolicy }}
+        name: {{ .Chart.Name }}-onsight
+        volumeMounts:
+        - name: {{ .Chart.Name }}-onsight-pv
+          mountPath: /persistent/
+        envFrom:
+        - configMapRef:
+            name: {{ .Chart.Name }}-configmap
+      volumes:
+      - name: {{ .Chart.Name }}-onsight-pv
+        persistentVolumeClaim:
+          claimName: {{ .Chart.Name }}-onsight-pv-claim
+      serviceAccountName: {{ .Chart.Name }}-serviceaccount
