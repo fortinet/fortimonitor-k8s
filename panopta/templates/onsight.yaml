@@ -17,6 +17,10 @@ metadata:
   name: {{ .Chart.Name }}-onsight
   labels:
     app: {{ .Chart.Name }}-osight
+    app.kubernetes.io/name: {{ include "panopta.name" . }}
+    helm.sh/chart: {{ include "panopta.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
   selector:
      matchLabels:
@@ -27,6 +31,7 @@ spec:
     metadata:
       labels:
         app: {{ .Chart.Name }}-onsight
+        version: {{ .Chart.Version }}
     spec:
       containers:
       - image: "{{ .Values.onsightImage.repository }}:{{ .Values.onsightImage.tag }}"

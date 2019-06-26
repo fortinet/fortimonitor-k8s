@@ -3,6 +3,10 @@ kind: DaemonSet
 metadata:
   labels:
     name: {{ .Chart.Name }}-agent
+    app.kubernetes.io/name: {{ include "panopta.name" . }}
+    helm.sh/chart: {{ include "panopta.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
   name: {{ .Chart.Name }}-agent
   namespace: default
 spec:
@@ -15,6 +19,7 @@ spec:
       creationTimestamp: null
       labels:
         name: {{ .Chart.Name }}-agent
+        version: {{ .Chart.Version }}
     spec:
       containers:
       - image: "{{ .Values.agentImage.repository }}:{{ .Values.agentImage.tag }}"
