@@ -2,7 +2,19 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-customer_key: your-server-key-123
+# Your Panopta customer key
+customer_key: your-customer-key-123
+
+# Uncomment the block below to specifiy additional
+# configuration options to be deployed on each
+# node's panopta agent
+
+# agent_config: |
+#   [docker_image_mapping]
+#   nginx=nginx
+#   
+#   [nginx]
+#   foo=bar
 
 aggregator_url: aggregator2.panopta.com
 
