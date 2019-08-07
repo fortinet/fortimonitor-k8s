@@ -21,6 +21,10 @@ An example values.yaml file with all available options can be found [here](https
 Then deploy Panopta using:
 `helm install -f values.yaml panopta/panopta`
 
+## Upgrading Panopta
+1. Fetch new charts using `helm repo update`
+2. Upgrade your deployment using `helm upgrade <deployment name> panopta/panopta`
+
 ## Setting up Tiller
 1. Fetch `tiller-rbac.yaml` from [here](https://github.com/Panopta/kubernetes/blob/master/tiller-rbac.yaml)
 2. Deploy the correct RBAC credentials for Tiller using `kubectl create -f tiller-rbac.yaml`
