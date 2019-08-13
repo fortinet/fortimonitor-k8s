@@ -8,7 +8,6 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
   name: {{ .Chart.Name }}-agent
-  namespace: default
 spec:
   revisionHistoryLimit: 10
   selector:
