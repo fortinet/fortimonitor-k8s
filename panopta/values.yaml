@@ -18,6 +18,13 @@ customer_key: your-customer-key-123
 
 aggregator_url: aggregator2.panopta.com
 
+kubeStateMetrics:
+  install: true
+  endpoint: http://kube-state-metrics.default.svc:8080
+
+metricsServer:
+  install: true
+
 onsightImage:
   repository: panopta/onsight-vcollector
   tag: kubernetes
@@ -27,3 +34,6 @@ agentImage:
   repository: panopta/agent
   tag: kubernetes
   pullPolicy: Always
+
+kube-state-metrics:
+  fullnameOverride: kube-state-metrics
