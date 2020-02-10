@@ -1,0 +1,61 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  labels:
+    name: panopta-agent
+    app.kubernetes.io/name: panopta
+  name: panopta-agent
+spec:
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      name: panopta-agent
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        name: panopta-agent
+        version: 0.1.6
+    spec:
+      containers:
+      - image: "panopta/agent:kubernetes"
+        imagePullPolicy: Always
+        name: panopta-agent
+        resources:
+          limits:
+            memory: 200Mi
+        volumeMounts:
+        - mountPath: /run/docker.sock
+          name: rundocker
+        - mountPath: /host/proc
+          name: proc
+        - mountPath: /host/sys/fs/cgroup
+          name: sysfscgroup
+        envFrom:
+        - configMapRef:
+            name: panopta-configmap
+        env:
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: AGGREGATOR_URL
+          value: 'panopta-agent-proxy:8443'
+      volumes:
+      - hostPath:
+          path: /run/docker.sock
+          type: ""
+        name: rundocker
+      - hostPath:
+          path: /proc
+          type: ""
+        name: proc
+      - hostPath:
+          path: /sys/fs/cgroup
+          type: ""
+        name: sysfscgroup
+      serviceAccountName: panopta-serviceaccount
+  updateStrategy:
+    rollingUpdate:
+      maxUnavailable: 1
+    type: RollingUpdate
