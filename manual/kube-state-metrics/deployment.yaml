@@ -40,5 +40,5 @@ spec:
         securityContext:
           runAsUser: 65534
       nodeSelector:
-        kubernetes.io/os: linux
+        beta.kubernetes.io/os: linux
       serviceAccountName: kube-state-metrics

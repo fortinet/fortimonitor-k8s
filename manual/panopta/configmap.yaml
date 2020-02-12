@@ -7,4 +7,4 @@ data:
   AGGREGATOR_URL: aggregator2.panopta.com
   AGENT_KEYS: ""
   AGENT_CONFIG: ""
-  KUBE_STATE_ENDPOINT: "http://kube-state-metrics.default.svc:8080"
+  KUBE_STATE_ENDPOINT: "http://kube-state-metrics.kube-system.svc:8080"
