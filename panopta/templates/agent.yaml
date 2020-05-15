@@ -2,28 +2,28 @@ apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
   labels:
-    name: {{ .Chart.Name }}-agent
+    name: {{ .Chart.Name }}-k8s-agent
     app.kubernetes.io/name: {{ include "panopta.name" . }}
     helm.sh/chart: {{ include "panopta.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
-  name: {{ .Chart.Name }}-agent
+  name: {{ .Chart.Name }}-k8s-agent
 spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      name: {{ .Chart.Name }}-agent
+      name: {{ .Chart.Name }}-k8s-agent
   template:
     metadata:
       creationTimestamp: null
       labels:
-        name: {{ .Chart.Name }}-agent
+        name: {{ .Chart.Name }}-k8s-agent
         version: {{ .Chart.Version }}
     spec:
       containers:
       - image: "{{ .Values.agentImage.repository }}:{{ .Values.agentImage.tag }}"
         imagePullPolicy: {{ .Values.agentImage.pullPolicy }}
-        name: {{ .Chart.Name }}-agent
+        name: {{ .Chart.Name }}-k8s-agent
         resources:
           limits:
             memory: 200Mi
