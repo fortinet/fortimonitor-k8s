@@ -5,6 +5,9 @@
 # Your Panopta customer key
 customer_key: your-customer-key-123
 
+# Name of the cluster as it will show in the controlpanel
+clusterName: "Kubernetes Cluster"
+
 # Uncomment the block below to specifiy additional
 # configuration options to be deployed on each
 # node's panopta agent

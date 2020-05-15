@@ -4,6 +4,7 @@ metadata:
   name: {{ .Chart.Name }}-configmap
 data:
   CUSTOMER_KEY: {{ quote .Values.customer_key }}
+  CLUSTER_NAME: {{ quote .Values.clusterName }}
   AGGREGATOR_URL: {{ quote .Values.aggregator_url }}
   AGENT_KEYS: ""
   AGENT_CONFIG: {{ quote .Values.agent_config | replace "\\n" "\\\\n" }}
