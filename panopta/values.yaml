@@ -8,9 +8,10 @@ customer_key: your-customer-key-123
 # Name of the cluster as it will show in the controlpanel
 clusterName: "Kubernetes Cluster"
 
-# Uncomment the block below to specifiy additional
-# configuration options to be deployed on each
-# node's panopta agent
+agent_config: ""
+# Replace the above line with a block like below
+# to specifiy additional configuration options
+# to be deployed on each node's panopta agent
 
 # agent_config: |
 #   [docker_image_mapping]
