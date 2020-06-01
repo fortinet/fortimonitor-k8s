@@ -9,3 +9,4 @@ data:
   AGENT_KEYS: ""
   AGENT_CONFIG: {{ quote .Values.agent_config | replace "\\n" "\\\\n" }}
   KUBE_STATE_ENDPOINT: {{ quote .Values.kubeStateMetrics.endpoint }}
+  PANOPTA_NAMESPACE: {{ quote .Release.Namespace }}
