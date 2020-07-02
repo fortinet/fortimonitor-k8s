@@ -46,3 +46,10 @@ Then deploy Panopta using:
 ## Setting up metrics-server
 1. If you have not already added the Panopta helm repo, see step `1.` under *Deploying Panopta*
 2. `helm install --namespace "kube-system" panopta/metrics-server`
+
+## Uninstalling Panopta
+Run `helm delete <release_name>`
+
+You can find the name of the release with `helm ls`
+
+(Note: In Helm >3.x you can use either `helm delete` or `helm uninstall`)
