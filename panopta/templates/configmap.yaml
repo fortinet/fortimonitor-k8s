@@ -8,4 +8,5 @@ data:
   AGGREGATOR_URL: {{ quote .Values.aggregator_url }}
   AGENT_CONFIG: {{ quote .Values.agent_config | replace "\\n" "\\\\n" }}
   KUBE_STATE_ENDPOINT: {{ quote .Values.kubeStateMetrics.endpoint }}
+  TOP_N_NAMESPACES: {{ quote .Values.topNNamespaces }}
   PANOPTA_NAMESPACE: {{ quote .Release.Namespace }}

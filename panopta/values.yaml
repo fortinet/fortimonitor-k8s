@@ -29,6 +29,8 @@ kubeStateMetrics:
 metricsServer:
   install: true
 
+topNNamespaces: 50
+
 onsightImage:
   repository: panopta/onsight-vcollector
   tag: kubernetes
