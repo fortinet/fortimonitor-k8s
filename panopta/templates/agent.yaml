@@ -19,6 +19,8 @@ spec:
       labels:
         name: {{ .Chart.Name }}-k8s-agent
         version: {{ .Chart.Version }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec:
       containers:
       - image: "{{ .Values.agentImage.repository }}:{{ .Values.agentImage.tag }}"

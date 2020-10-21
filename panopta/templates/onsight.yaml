@@ -32,6 +32,8 @@ spec:
       labels:
         app: {{ .Chart.Name }}-onsight
         version: {{ .Chart.Version }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec:
       containers:
       - image: "{{ .Values.onsightImage.repository }}:{{ .Values.onsightImage.tag }}"
