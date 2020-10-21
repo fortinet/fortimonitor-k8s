@@ -8,5 +8,9 @@ spec:
   ports:
   - port: 8443
     targetPort: 8443
+    name: agent-proxy
+  - port: 8090
+    targetPort: 8090
+    name: k8sengine
   selector:
     app: {{ .Chart.Name }}-onsight
