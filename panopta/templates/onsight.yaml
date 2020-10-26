@@ -45,6 +45,11 @@ spec:
         envFrom:
         - configMapRef:
             name: {{ .Chart.Name }}-configmap
+        resources:
+          requests:
+            ephemeral-storage: "50Gi"
+          limits:
+            ephemeral-storage: "50Gi"
       volumes:
       - name: {{ .Chart.Name }}-onsight-pv
         persistentVolumeClaim:
