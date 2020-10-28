@@ -31,6 +31,10 @@ metricsServer:
 
 topNNamespaces: 25
 
+onsightRequests:
+  cpu: "3.0"
+  memory: "3Gi"
+
 onsightImage:
   repository: panopta/onsight-vcollector
   tag: kubernetes
