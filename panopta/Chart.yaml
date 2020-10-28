@@ -2,3 +2,12 @@ apiVersion: v1
 description: A Helm chart for deploying Panopta's Kubernetes monitoring infrastructure
 name: panopta
 version: 0.2.2
+dependencies:
+  - name: kube-state-metrics
+    version: 2.3.*
+    repository: https://panopta.github.io/kubernetes/repo/
+    condition: kubeStateMetrics.install
+  - name: metrics-server
+    version: 2.6.*
+    repository: https://kubernetes-charts.storage.googleapis.com/
+    condition: metricsServer.install
