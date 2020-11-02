@@ -7,6 +7,6 @@ data:
   CLUSTER_NAME: {{ quote .Values.clusterName }}
   AGGREGATOR_URL: {{ quote .Values.aggregator_url }}
   AGENT_CONFIG: {{ quote .Values.agent_config | replace "\\n" "\\\\n" }}
-  KUBE_STATE_ENDPOINT: {{ quote .Values.kubeStateMetrics.endpoint }}
   TOP_N_NAMESPACES: {{ quote .Values.topNNamespaces }}
   PANOPTA_NAMESPACE: {{ quote .Release.Namespace }}
+  KUBE_STATE_ENDPOINT: "http://panopta-kube-state-metrics.{{ .Release.Namespace }}.svc:8080"

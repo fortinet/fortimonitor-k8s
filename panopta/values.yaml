@@ -24,7 +24,6 @@ aggregator_url: aggregator2.panopta.com
 
 kubeStateMetrics:
   install: true
-  endpoint: http://kube-state-metrics.default.svc:8080
 
 metricsServer:
   install: true
