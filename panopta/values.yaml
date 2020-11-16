@@ -28,7 +28,7 @@ kubeStateMetrics:
 metricsServer:
   install: true
 
-topNNamespaces: 25
+topNNamespaces: 0
 
 onsightRequests:
   cpu: "3.0"
