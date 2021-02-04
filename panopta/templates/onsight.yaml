@@ -49,9 +49,9 @@ spec:
           requests:
             cpu: "{{ .Values.onsightRequests.cpu }}"
             memory: "{{ .Values.onsightRequests.memory }}"
-            ephemeral-storage: "50Gi"
+            ephemeral-storage: "{{ .Values.onsightRequests.ephemeral }}"
           limits:
-            ephemeral-storage: "50Gi"
+            ephemeral-storage: "{{ .Values.onsightRequests.ephemeral }}"
         livenessProbe:
           exec:
             command:

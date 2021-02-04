@@ -33,6 +33,7 @@ topNNamespaces: 0
 onsightRequests:
   cpu: "3.0"
   memory: "3Gi"
+  ephemeral: "50Gi"
 
 onsightImage:
   repository: panopta/onsight-vcollector

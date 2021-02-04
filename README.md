@@ -11,19 +11,24 @@
 In a few minutes, your cluster should show up in the Panopta control panel.
 
 ### Advanced configuration
-If you wish to further customize your Panopta deployment, you can edit a values.yaml file.
-An example values.yaml file with all available options can be found [here](https://github.com/Panopta/kubernetes/blob/master/panopta/values.yaml)
-Then deploy Panopta using:
-`helm install -f values.yaml panopta/panopta`
+If you wish to further customize your Panopta deployment, you can pass additional options to the install command by adding one to many  
+`--set <key>=<value>`  
+to the install command.  
+Below is a table of available configuration options.  
+You can also specify such options in a YAML-formatted `values.yaml` file which you can then pass along to the install command with `-f values.yaml`
 
-### Configuration Parameters
-| Key Name                  | Default                                    | Description                                                                                                                |
-|---------------------------|--------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| customer_key              | <Required>                                 | Your Panopta customer key                                                                                                  |
-| agent_config              | None                                       | Any additional blocks of configuration to deploy onto the nodes' agents                                                    |
-| kubeStateMetrics.install  | true                                       | Whether to install kube-state-metrics as part of the deployment. Set to `false` if it's already installed.                 |
-| kubeStateMetrics.endpoint | http://kube-state-metrics.default.svc:8080 | The endpoint where kube-state-metrics can be accessed. If it was installed outside of Panopta, you'll need to update this. |
-| metricsServer.install     | true                                       | Whether to install metrics-server as part of the deployment. Set to `false` if it's already installed.                     |
+### Configuration Options
+
+| Key Name                  | Default                                    | Description                                                                                                              |
+|---------------------------|--------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| customer_key              | None (Required)                            | Your Panopta customer key                                                                                                |
+| clusterName               | Kubernetes Cluster                         | The name of this cluster as it will show up in the controlpanel                                                          |
+| metricsServer.install     | true                                       | Whether to install metrics-server as part of the deployment. Set to `false` if it's already installed.                   |
+| topNNamespaces            | 0                                          | Number of namespaces to pull in, ordered by number of pods. 0 to include all.                                            |
+| onsightRequests.cpu       | 3.0                                        | Requested CPU for the Panopta OnSight                                                                                    |
+| onsightRequests.memory    | 3Gi                                        | Requested Memory for the Panopta OnSight                                                                                 |
+| onsightRequests.ephemeral | 3Gi                                        | Requested Ephemeral Storage for the Panopta OnSight                                                                      |
+| agent_config              | None                                       | Any additional blocks of configuration to deploy onto the nodes' agents                                                  |
 
 ## Upgrading Panopta
 1. Fetch new charts using `helm repo update`
