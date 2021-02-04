@@ -27,7 +27,7 @@ You can also specify such options in a YAML-formatted `values.yaml` file which y
 | topNNamespaces            | 0                                          | Number of namespaces to pull in, ordered by number of pods. 0 to include all.                                            |
 | onsightRequests.cpu       | 3.0                                        | Requested CPU for the Panopta OnSight                                                                                    |
 | onsightRequests.memory    | 3Gi                                        | Requested Memory for the Panopta OnSight                                                                                 |
-| onsightRequests.ephemeral | 3Gi                                        | Requested Ephemeral Storage for the Panopta OnSight                                                                      |
+| onsightRequests.ephemeral | 50Gi                                       | Requested Ephemeral Storage for the Panopta OnSight                                                                      |
 | agent_config              | None                                       | Any additional blocks of configuration to deploy onto the nodes' agents                                                  |
 
 ## Upgrading Panopta
