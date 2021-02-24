@@ -46,12 +46,45 @@ spec:
         - configMapRef:
             name: {{ .Chart.Name }}-configmap
         resources:
+          {{- $size := .Values.size }}
           requests:
+            {{- if .Values.onsightRequests.cpu }}
             cpu: "{{ .Values.onsightRequests.cpu }}"
+            {{- else if eq $size "small" }}
+            cpu: "1.0"
+            {{- else if eq $size "medium" }}
+            cpu: "2.0"
+            {{- else if eq $size "large" }}
+            cpu: "3.0"
+            {{- end }}
+            {{- if .Values.onsightRequests.memory }}
             memory: "{{ .Values.onsightRequests.memory }}"
+            {{- else if eq $size "small" }}
+            memory: "1Gi"
+            {{- else if eq $size "medium" }}
+            memory: "2Gi"
+            {{- else if eq $size "large" }}
+            memory: "3Gi"
+            {{- end }}
+            {{- if .Values.onsightRequests.ephemeral }}
             ephemeral-storage: "{{ .Values.onsightRequests.ephemeral }}"
+            {{- else if eq $size "small" }}
+            ephemeral-storage: "10Gi"
+            {{- else if eq $size "medium" }}
+            ephemeral-storage: "20Gi"
+            {{- else if eq $size "large" }}
+            ephemeral-storage: "50Gi"
+            {{- end }}
           limits:
+            {{- if .Values.onsightRequests.ephemeral }}
             ephemeral-storage: "{{ .Values.onsightRequests.ephemeral }}"
+            {{- else if eq $size "small" }}
+            ephemeral-storage: "10Gi"
+            {{- else if eq $size "medium" }}
+            ephemeral-storage: "20Gi"
+            {{- else if eq $size "large" }}
+            ephemeral-storage: "50Gi"
+            {{- end }}
         livenessProbe:
           exec:
             command:

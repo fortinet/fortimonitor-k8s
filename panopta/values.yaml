@@ -2,6 +2,10 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+# Size of your cluster. Possible values: small, medium, large
+# See README for more information
+size: medium
+
 # Your Panopta customer key
 customer_key: your-customer-key-123
 
@@ -31,9 +35,9 @@ metricsServer:
 topNNamespaces: 0
 
 onsightRequests:
-  cpu: "3.0"
-  memory: "3Gi"
-  ephemeral: "50Gi"
+  cpu: ""
+  memory: ""
+  ephemeral: ""
 
 onsightImage:
   repository: panopta/onsight-vcollector
