@@ -51,8 +51,21 @@ agentImage:
 
 kube-state-metrics:
   fullnameOverride: panopta-kube-state-metrics
-  enablegzipencoding: false
-  metricwhitelist: "kube_pod_container_resource_requests,kube_node_status_allocatable,kube_pod_info,kube_pod_container_status_restarts,kube_pod_container_status_restarts_total,kube_pod_container_status_waiting_reason,kube_pod_container_status_terminated_reason,kube_pod_container_status_last_terminated_reason,kube_node_spec_unschedulable,kube_node_status_condition"
+  extraArgs:
+    - "--enable-gzip-encoding"
+  metricAllowlist:
+    - kube_pod_container_resource_requests
+    - kube_node_status_allocatable
+    - kube_pod_info
+    - kube_pod_container_status_restarts
+    - kube_pod_container_status_restarts_total
+    - kube_pod_container_status_waiting_reason
+    - kube_pod_container_status_terminated_reason
+    - kube_pod_container_status_last_terminated_reason
+    - kube_node_spec_unschedulable
+    - kube_node_status_condition
 
 metrics-server:
-  args: ['--kubelet-preferred-address-types', 'InternalIP,Hostname,InternalDNS,ExternalDNS,ExternalIP']
+  apiService:
+    create: true
+    # extraArgs: ['--kubelet-preferred-address-types', 'InternalIP,Hostname,InternalDNS,ExternalDNS,ExternalIP']
