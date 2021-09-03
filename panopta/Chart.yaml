@@ -4,10 +4,10 @@ name: panopta
 version: 0.3.0
 dependencies:
   - name: kube-state-metrics
-    version: 2.3.*
-    repository: https://panopta.github.io/kubernetes/repo/
+    version: 3.5.*
+    repository: https://prometheus-community.github.io/helm-charts
     condition: kubeStateMetrics.install
   - name: metrics-server
-    version: 2.6.*
-    repository: https://kubernetes-charts.storage.googleapis.com/
+    version: 5.9.*
+    repository: https://charts.bitnami.com/bitnami
     condition: metricsServer.install
