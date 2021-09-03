@@ -1,9 +1,0 @@
-dependencies:
-- name: kube-state-metrics
-  repository: https://panopta.github.io/kubernetes/repo/
-  version: 2.3.0
-- name: metrics-server
-  repository: https://kubernetes-charts.storage.googleapis.com/
-  version: 2.6.0
-digest: sha256:b6e1daeed3b3fb351cb847ffebe553c17f3f9d6bb2b241a1831ab592e52ec41b
-generated: "2020-10-28T01:27:58.634860798-05:00"

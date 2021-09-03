@@ -1,9 +1,0 @@
-dependencies:
-  - name: kube-state-metrics
-    version: 2.3.*
-    repository: https://panopta.github.io/kubernetes/repo/
-    condition: kubeStateMetrics.install
-  - name: metrics-server
-    version: 2.6.*
-    repository: https://kubernetes-charts.storage.googleapis.com/
-    condition: metricsServer.install
