@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: panopta-metrics-server
+  labels:
+    app.kubernetes.io/name: metrics-server
+    app.kubernetes.io/instance: panopta
+spec:
+  type: ClusterIP
+  ports:
+    - name: https
+      port: 443
+      protocol: TCP
+      targetPort: https
+      nodePort: null
+  selector:
+    app.kubernetes.io/name: metrics-server
+    app.kubernetes.io/instance: panopta

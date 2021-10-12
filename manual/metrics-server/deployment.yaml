@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: panopta-metrics-server
+  labels:
+    app.kubernetes.io/name: metrics-server
+    app.kubernetes.io/instance: panopta
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: metrics-server
+      app.kubernetes.io/instance: panopta
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: metrics-server
+        app.kubernetes.io/instance: panopta
+    spec:
+      
+      serviceAccountName: panopta-metrics-server
+      affinity:
+        podAffinity:
+          
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/name: metrics-server
+                    app.kubernetes.io/instance: panopta
+                namespaces:
+                  - "panopta"
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+        nodeAffinity:
+          
+      containers:
+        - name: metrics-server
+          image: docker.io/bitnami/metrics-server:0.5.0-debian-10-r83
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - name: https
+              containerPort: 8443
+          command:
+            - metrics-server
+          args:
+            - --secure-port=8443
+          resources:
+            limits: {}
+            requests: {}
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /livez
+              port: https
+              scheme: HTTPS
+            periodSeconds: 10
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /readyz
+              port: https
+              scheme: HTTPS
+            periodSeconds: 10
+          securityContext:
+            readOnlyRootFilesystem: false
+            runAsNonRoot: true

@@ -2,9 +2,12 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: panopta-configmap
+  namespace: panopta
 data:
   CUSTOMER_KEY: YOUR-CUSTOMER-KEY
+  CLUSTER_NAME: "Kubernetes Cluster"
   AGGREGATOR_URL: aggregator2.panopta.com
-  AGENT_KEYS: ""
   AGENT_CONFIG: ""
-  KUBE_STATE_ENDPOINT: "http://kube-state-metrics.kube-system.svc:8080"
+  TOP_N_NAMESPACES: "0"
+  PANOPTA_NAMESPACE: "panopta"
+  KUBE_STATE_ENDPOINT: "http://panopta-kube-state-metrics.panopta.svc:8080"

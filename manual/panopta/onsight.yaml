@@ -4,6 +4,7 @@ metadata:
   name: panopta-onsight-pv-claim
   labels:
     app: panopta-onsight
+  namespace: panopta
 spec:
   accessModes:
     - ReadWriteOnce
@@ -18,6 +19,7 @@ metadata:
   labels:
     app: panopta-osight
     app.kubernetes.io/name: panopta
+  namespace: panopta
 spec:
   selector:
      matchLabels:
@@ -40,6 +42,15 @@ spec:
         envFrom:
         - configMapRef:
             name: panopta-configmap
+        livenessProbe:
+          exec:
+            command:
+            - bash
+            - -c
+            - 'n=$(date +"%s") && t=$(mysql ApplianceDB -e "SELECT value FROM ApplianceConfiguration WHERE name = \"last_sync_time\"" -sN | date "+%s" -f -) && d=$((n-t)) && echo "$d" && [ "$d" -le "600" ]'
+          initialDelaySeconds: 600
+          failureThreshold: 2
+          periodSeconds: 30
       volumes:
       - name: panopta-onsight-pv
         persistentVolumeClaim:

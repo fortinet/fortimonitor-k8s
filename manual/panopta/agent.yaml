@@ -1,10 +1,11 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   labels:
-    name: panopta-agent
+    name: panopta-k8s-agent
     app.kubernetes.io/name: panopta
-  name: panopta-agent
+  name: panopta-k8s-agent
+  namespace: panopta
 spec:
   revisionHistoryLimit: 10
   selector:
