@@ -35,6 +35,8 @@ spec:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec:
+      tolerations:
+        {{- toYaml $.Values.podTolerations.onsight | nindent 8 }}
       containers:
       - image: "{{ .Values.onsightImage.repository }}:{{ .Values.onsightImage.tag }}"
         imagePullPolicy: {{ .Values.onsightImage.pullPolicy }}

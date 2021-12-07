@@ -49,6 +49,10 @@ agentImage:
   tag: kubernetes
   pullPolicy: Always
 
+podTolerations:
+  agent: []
+  onsight: []
+
 kube-state-metrics:
   fullnameOverride: panopta-kube-state-metrics
   extraArgs:

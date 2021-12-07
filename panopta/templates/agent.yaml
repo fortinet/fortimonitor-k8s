@@ -22,6 +22,8 @@ spec:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec:
+      tolerations:
+        {{- toYaml $.Values.podTolerations.agent | nindent 8 }}
       containers:
       - image: "{{ .Values.agentImage.repository }}:{{ .Values.agentImage.tag }}"
         imagePullPolicy: {{ .Values.agentImage.pullPolicy }}
