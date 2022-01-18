@@ -17,7 +17,7 @@ kind: Deployment
 metadata:
   name: panopta-onsight
   labels:
-    app: panopta-osight
+    app: panopta-onsight
     app.kubernetes.io/name: panopta
   namespace: panopta
 spec:
