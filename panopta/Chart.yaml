@@ -1,7 +1,7 @@
 apiVersion: v2
 description: Helm chart for deploying Panopta's Kubernetes monitoring infrastructure
 name: panopta
-version: 0.4.0
+version: 0.4.1
 dependencies:
   - name: kube-state-metrics
     version: 3.5.*
