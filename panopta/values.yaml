@@ -20,7 +20,7 @@ agent_config: ""
 # agent_config: |
 #   [docker_image_mapping]
 #   nginx=nginx
-#   
+#
 #   [nginx]
 #   foo=bar
 
@@ -73,3 +73,5 @@ metrics-server:
   apiService:
     create: true
     # extraArgs: ['--kubelet-preferred-address-types', 'InternalIP,Hostname,InternalDNS,ExternalDNS,ExternalIP']
+
+onsightNodeSelector: {}
