@@ -10,6 +10,9 @@ spec:
   resources:
     requests:
       storage: 10Gi
+  {{- if .Values.onsightStorageClass.enabled }}
+  storageClassName: {{ .Chart.Name }}-onsight
+  {{- end }}
 ---
 apiVersion: apps/v1
 kind: Deployment

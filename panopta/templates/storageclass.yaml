@@ -1,0 +1,17 @@
+{{- if .Values.onsightStorageClass.enabled -}}
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  {{- with .Values.onsightStorageClass.annotations }}
+  annotations: {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.onsightStorageClass.labels }}
+  labels: {{- toYaml . | nindent 4 }}
+  {{- end }}
+  name: {{ .Chart.Name }}-onsight
+allowVolumeExpansion: {{ .Values.onsightStorageClass.allowVolumeExpansion }}
+parameters: {{- toYaml .Values.onsightStorageClass.parameters | nindent 2 }}
+provisioner: {{ .Values.onsightStorageClass.provisioner }}
+reclaimPolicy: {{ .Values.onsightStorageClass.reclaimPolicy }}
+volumeBindingMode: {{ .Values.onsightStorageClass.volumeBindingMode }}
+{{- end }}
