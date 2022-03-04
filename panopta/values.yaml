@@ -74,4 +74,16 @@ metrics-server:
     create: true
     # extraArgs: ['--kubelet-preferred-address-types', 'InternalIP,Hostname,InternalDNS,ExternalDNS,ExternalIP']
 
+# If you are using NodeSelector, you should use StorageClass with volumeBindingMode: WaitForFirstConsumer
+# See for additional info https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode
 onsightNodeSelector: {}
+
+onsightStorageClass:
+  enabled: false
+  annotations: {}
+  labels: {}
+  parameters: {}
+  allowVolumeExpansion: true
+  provisioner: ""
+  reclaimPolicy: Delete
+  volumeBindingMode: ""
