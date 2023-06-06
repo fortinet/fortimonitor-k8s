@@ -40,8 +40,8 @@ onsightRequests:
   ephemeral: ""
 
 onsightImage:
-  repository: panopta/onsight-vcollector
-  tag: kubernetes
+  repository: panopta/onsight-collector
+  tag: 2023.2.06
   pullPolicy: Always
 
 agentImage:
