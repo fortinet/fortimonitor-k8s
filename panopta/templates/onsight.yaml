@@ -103,6 +103,11 @@ spec:
       - name: {{ .Chart.Name }}-onsight-pv
         persistentVolumeClaim:
           claimName: {{ .Chart.Name }}-onsight-pv-claim
+      hostAliases:
+        - hostnames:
+            - "onsight-collector"
+            - "onsight-collector.onsight"
+          ip: "127.0.0.1"
       serviceAccountName: {{ .Chart.Name }}-serviceaccount
       {{- with .Values.onsightNodeSelector }}
       nodeSelector: {{ toYaml . | nindent 8 }}
