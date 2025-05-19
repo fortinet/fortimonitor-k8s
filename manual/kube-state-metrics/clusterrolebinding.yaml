@@ -5,13 +5,13 @@ metadata:
     app.kubernetes.io/name: kube-state-metrics
     helm.sh/chart: kube-state-metrics-3.5.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/instance: panopta
-  name: panopta-kube-state-metrics
+    app.kubernetes.io/instance: fortimonitor
+  name: fortimonitor-kube-state-metrics
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: panopta-kube-state-metrics
+  name: fortimonitor-kube-state-metrics
 subjects:
 - kind: ServiceAccount
-  name: panopta-kube-state-metrics
-  namespace: panopta
+  name: fortimonitor-kube-state-metrics
+  namespace: fortimonitor

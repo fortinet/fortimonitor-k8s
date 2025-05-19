@@ -1,4 +1,4 @@
-# Default values for panopta.
+# Default values for FortiMonitor.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -6,7 +6,7 @@
 # See README for more information
 size: medium
 
-# Your Panopta customer key
+# Your FortiMonitor customer key
 customer_key: your-customer-key-123
 
 # Name of the cluster as it will show in the controlpanel
@@ -15,7 +15,7 @@ clusterName: "Kubernetes Cluster"
 agent_config: ""
 # Replace the above line with a block like below
 # to specifiy additional configuration options
-# to be deployed on each node's panopta agent
+# to be deployed on each node's FortiMonitor agent
 
 # agent_config: |
 #   [docker_image_mapping]
@@ -24,7 +24,7 @@ agent_config: ""
 #   [nginx]
 #   foo=bar
 
-aggregator_url: aggregator2.panopta.com
+aggregator_url: rx.us01.fortimonitor.com
 
 kubeStateMetrics:
   install: true
@@ -54,7 +54,7 @@ podTolerations:
   onsight: []
 
 kube-state-metrics:
-  fullnameOverride: panopta-kube-state-metrics
+  fullnameOverride: fortimonitor-kube-state-metrics
   extraArgs:
     - "--enable-gzip-encoding"
   metricAllowlist:

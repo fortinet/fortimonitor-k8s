@@ -20,8 +20,8 @@ metadata:
   name: {{ .Chart.Name }}-onsight
   labels:
     app: {{ .Chart.Name }}-osight
-    app.kubernetes.io/name: {{ include "panopta.name" . }}
-    helm.sh/chart: {{ include "panopta.chart" . }}
+    app.kubernetes.io/name: {{ include "fortimonitor.name" . }}
+    helm.sh/chart: {{ include "fortimonitor.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:

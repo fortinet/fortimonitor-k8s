@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: panopta-kube-state-metrics
-  namespace: panopta
+  name: fortimonitor-kube-state-metrics
+  namespace: fortimonitor
   labels:
     app.kubernetes.io/name: kube-state-metrics
     helm.sh/chart: "kube-state-metrics-3.5.0"
-    app.kubernetes.io/instance: "panopta"
+    app.kubernetes.io/instance: "fortimonitor"
     app.kubernetes.io/managed-by: "Helm"
     app.kubernetes.io/version: "2.2.0"
 spec:
@@ -18,10 +18,10 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: kube-state-metrics
-        app.kubernetes.io/instance: "panopta"
+        app.kubernetes.io/instance: "fortimonitor"
     spec:
       hostNetwork: false
-      serviceAccountName: panopta-kube-state-metrics
+      serviceAccountName: fortimonitor-kube-state-metrics
       securityContext:
         fsGroup: 65534
         runAsGroup: 65534

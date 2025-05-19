@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: panopta-onsight-pv-claim
+  name: fortimonitor-onsight-pv-claim
   labels:
-    app: panopta-onsight
-  namespace: panopta
+    app: fortimonitor-onsight
+  namespace: fortimonitor
 spec:
   accessModes:
     - ReadWriteOnce
@@ -15,33 +15,33 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: panopta-onsight
+  name: fortimonitor-onsight
   labels:
-    app: panopta-onsight
-    app.kubernetes.io/name: panopta
-  namespace: panopta
+    app: fortimonitor-onsight
+    app.kubernetes.io/name: fortimonitor
+  namespace: fortimonitor
 spec:
   selector:
      matchLabels:
-        app: panopta-onsight
+        app: fortimonitor-onsight
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: panopta-onsight
+        app: fortimonitor-onsight
         version: 0.1.6
     spec:
       containers:
       - image: "panopta/onsight-vcollector:kubernetes"
         imagePullPolicy: Always
-        name: panopta-onsight
+        name: fortimonitor-onsight
         volumeMounts:
-        - name: panopta-onsight-pv
+        - name: fortimonitor-onsight-pv
           mountPath: /persistent/
         envFrom:
         - configMapRef:
-            name: panopta-configmap
+            name: fortimonitor-configmap
         livenessProbe:
           exec:
             command:
@@ -52,7 +52,7 @@ spec:
           failureThreshold: 2
           periodSeconds: 30
       volumes:
-      - name: panopta-onsight-pv
+      - name: fortimonitor-onsight-pv
         persistentVolumeClaim:
-          claimName: panopta-onsight-pv-claim
-      serviceAccountName: panopta-serviceaccount
+          claimName: fortimonitor-onsight-pv-claim
+      serviceAccountName: fortimonitor-serviceaccount

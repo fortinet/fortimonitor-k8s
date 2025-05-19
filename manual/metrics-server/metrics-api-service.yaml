@@ -4,11 +4,11 @@ metadata:
   name: v1beta1.metrics.k8s.io
   labels:
     app.kubernetes.io/name: metrics-server
-    app.kubernetes.io/instance: panopta
+    app.kubernetes.io/instance: fortimonitor
 spec:
   service:
-    name: panopta-metrics-server
-    namespace: panopta
+    name: fortimonitor-metrics-server
+    namespace: fortimonitor
   group: metrics.k8s.io
   version: v1beta1
   insecureSkipTLSVerify: true
