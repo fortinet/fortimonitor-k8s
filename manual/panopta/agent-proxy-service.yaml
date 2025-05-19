@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: panopta-agent-proxy
+  name: fortimonitor-agent-proxy
   labels:
-    name: panopta-agent-proxy
-  namespace: panopta
+    name: fortimonitor-agent-proxy
+  namespace: fortimonitor
 spec:
   ports:
   - port: 8443
@@ -14,4 +14,4 @@ spec:
     targetPort: 8090
     name: k8sengine
   selector:
-    app: panopta-onsight
+    app: fortimonitor-onsight

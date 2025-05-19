@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: panopta-metrics-server
+  name: fortimonitor-metrics-server
   labels:
     app.kubernetes.io/name: metrics-server
-    app.kubernetes.io/instance: panopta
+    app.kubernetes.io/instance: fortimonitor
 spec:
   type: ClusterIP
   ports:
@@ -15,4 +15,4 @@ spec:
       nodePort: null
   selector:
     app.kubernetes.io/name: metrics-server
-    app.kubernetes.io/instance: panopta
+    app.kubernetes.io/instance: fortimonitor

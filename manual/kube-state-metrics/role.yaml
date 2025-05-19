@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/name: kube-state-metrics
     helm.sh/chart: kube-state-metrics-3.5.0
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/instance: panopta
-  name: panopta-kube-state-metrics
+    app.kubernetes.io/instance: fortimonitor
+  name: fortimonitor-kube-state-metrics
 rules:
 
 - apiGroups: ["certificates.k8s.io"]

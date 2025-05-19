@@ -2,26 +2,26 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   labels:
-    name: panopta-k8s-agent
-    app.kubernetes.io/name: panopta
-  name: panopta-k8s-agent
-  namespace: panopta
+    name: fortimonitor-k8s-agent
+    app.kubernetes.io/name: fortimonitor
+  name: fortimonitor-k8s-agent
+  namespace: fortimonitor
 spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      name: panopta-agent
+      name: fortimonitor-agent
   template:
     metadata:
       creationTimestamp: null
       labels:
-        name: panopta-agent
+        name: fortimonitor-agent
         version: 0.1.6
     spec:
       containers:
       - image: "panopta/agent:kubernetes"
         imagePullPolicy: Always
-        name: panopta-agent
+        name: fortimonitor-agent
         resources:
           limits:
             memory: 200Mi
@@ -34,14 +34,14 @@ spec:
           name: sysfscgroup
         envFrom:
         - configMapRef:
-            name: panopta-configmap
+            name: fortimonitor-configmap
         env:
         - name: NODE_NAME
           valueFrom:
             fieldRef:
               fieldPath: spec.nodeName
         - name: AGGREGATOR_URL
-          value: 'panopta-agent-proxy:8443'
+          value: 'fortimonitor-agent-proxy:8443'
       volumes:
       - hostPath:
           path: /run/docker.sock
@@ -55,7 +55,7 @@ spec:
           path: /sys/fs/cgroup
           type: ""
         name: sysfscgroup
-      serviceAccountName: panopta-serviceaccount
+      serviceAccountName: fortimonitor-serviceaccount
   updateStrategy:
     rollingUpdate:
       maxUnavailable: 1

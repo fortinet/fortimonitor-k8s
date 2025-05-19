@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: panopta-metrics-server
+  name: fortimonitor-metrics-server
   labels:
     app.kubernetes.io/name: metrics-server
-    app.kubernetes.io/instance: panopta
+    app.kubernetes.io/instance: fortimonitor
 spec:
   replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: metrics-server
-      app.kubernetes.io/instance: panopta
+      app.kubernetes.io/instance: fortimonitor
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
         app.kubernetes.io/name: metrics-server
-        app.kubernetes.io/instance: panopta
+        app.kubernetes.io/instance: fortimonitor
     spec:
       
-      serviceAccountName: panopta-metrics-server
+      serviceAccountName: fortimonitor-metrics-server
       affinity:
         podAffinity:
           
@@ -30,9 +30,9 @@ spec:
                 labelSelector:
                   matchLabels:
                     app.kubernetes.io/name: metrics-server
-                    app.kubernetes.io/instance: panopta
+                    app.kubernetes.io/instance: fortimonitor
                 namespaces:
-                  - "panopta"
+                  - "fortimonitor"
                 topologyKey: kubernetes.io/hostname
               weight: 1
         nodeAffinity:
