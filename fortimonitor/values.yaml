@@ -24,6 +24,9 @@ agent_config: ""
 #   [nginx]
 #   foo=bar
 
+agent:
+  nodeSelector: {}
+
 aggregator_url: rx.us01.fortimonitor.com
 
 kubeStateMetrics:
