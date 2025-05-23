@@ -47,6 +47,8 @@ spec:
         volumeMounts:
         - name: {{ .Chart.Name }}-onsight-pv
           mountPath: /persistent/
+        - name: {{ .Chart.Name }}-secret
+          mountPath: "/etc/fm-k8s"
         envFrom:
         - configMapRef:
             name: {{ .Chart.Name }}-configmap
@@ -103,6 +105,9 @@ spec:
       - name: {{ .Chart.Name }}-onsight-pv
         persistentVolumeClaim:
           claimName: {{ .Chart.Name }}-onsight-pv-claim
+      - name: {{ .Chart.Name }}-secret
+        secret:
+          secretName: {{ .Chart.Name }}-secret
       hostAliases:
         - hostnames:
             - "onsight-collector"
