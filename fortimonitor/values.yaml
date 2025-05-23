@@ -49,7 +49,7 @@ onsightImage:
 
 agentImage:
   repository: panopta/agent
-  tag: kubernetes
+  tag: kubernetes-2024.4.5
   pullPolicy: Always
 
 podTolerations:
