@@ -32,8 +32,8 @@ spec:
           limits:
             memory: 200Mi
         volumeMounts:
-        - mountPath: /run/docker.sock
-          name: rundocker
+        - mountPath: /host/var/run
+          name: hostvarrun
         - mountPath: /host/proc
           name: proc
         - mountPath: /host/sys/fs/cgroup
@@ -50,9 +50,9 @@ spec:
           value: '{{ .Chart.Name }}-agent-proxy:8443'
       volumes:
       - hostPath:
-          path: /run/docker.sock
+          path: /var/run
           type: ""
-        name: rundocker
+        name: hostvarrun
       - hostPath:
           path: /proc
           type: ""
