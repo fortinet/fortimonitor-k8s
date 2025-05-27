@@ -27,7 +27,9 @@ agent_config: ""
 agent:
   nodeSelector: {}
 
-aggregator_url: rx.us01.fortimonitor.com
+mediatorUrl: ""
+
+aggregator_url: ""
 
 kubeStateMetrics:
   install: true
