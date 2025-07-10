@@ -25,6 +25,7 @@ agent_config: ""
 #   foo=bar
 
 agent:
+  install: false
   nodeSelector: {}
 
 mediatorUrl: ""
