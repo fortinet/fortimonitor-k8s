@@ -35,7 +35,7 @@ kubeStateMetrics:
   install: true
 
 metricsServer:
-  install: true
+  install: false
 
 topNNamespaces: 0
 
