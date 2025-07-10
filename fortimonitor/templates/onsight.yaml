@@ -15,21 +15,20 @@ spec:
   {{- end }}
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ .Chart.Name }}-onsight
   labels:
-    app: {{ .Chart.Name }}-osight
+    app: {{ .Chart.Name }}-onsight
     app.kubernetes.io/name: {{ include "fortimonitor.name" . }}
     helm.sh/chart: {{ include "fortimonitor.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
+  serviceName: "{{ .Chart.Name }}-onsight"
   selector:
      matchLabels:
         app: {{ .Chart.Name }}-onsight
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
