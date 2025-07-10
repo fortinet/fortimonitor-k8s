@@ -39,6 +39,14 @@ spec:
     spec:
       tolerations:
         {{- toYaml $.Values.podTolerations.onsight | nindent 8 }}
+      initContainers:
+      - image: "{{ .Values.onsightImage.repository }}:{{ .Values.onsightImage.tag }}"
+        imagePullPolicy: {{ .Values.onsightImage.pullPolicy }}
+        name: "init-onsight"
+        volumeMounts:
+        - name: {{ .Chart.Name }}-onsight-pv
+          mountPath: /persistent/
+        command: ['sudo', '/usr/bin/bash', '-c', "source /root/k8s_integration.sh && init_k8s_appliancedb"]
       containers:
       - image: "{{ .Values.onsightImage.repository }}:{{ .Values.onsightImage.tag }}"
         imagePullPolicy: {{ .Values.onsightImage.pullPolicy }}
@@ -46,6 +54,9 @@ spec:
         volumeMounts:
         - name: {{ .Chart.Name }}-onsight-pv
           mountPath: /persistent/
+        - name: {{ .Chart.Name }}-onsight-pv
+          subPath: mysql
+          mountPath: /var/lib/mysql
         - name: {{ .Chart.Name }}-secret
           mountPath: "/etc/fm-k8s"
         envFrom:
