@@ -9,7 +9,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
+      storage: {{ .Values.onsightVolume.size }}
   {{- if .Values.onsightStorageClass.enabled }}
   storageClassName: {{ .Chart.Name }}-onsight
   {{- end }}

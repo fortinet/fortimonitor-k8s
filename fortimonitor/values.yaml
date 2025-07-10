@@ -45,6 +45,9 @@ onsightRequests:
   memory: ""
   ephemeral: ""
 
+onsightVolume:
+  size: "50Gi"
+
 onsightImage:
   repository: panopta/onsight-collector
   tag: 2023.2.06
