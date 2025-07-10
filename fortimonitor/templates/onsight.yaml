@@ -107,7 +107,7 @@ spec:
             command:
             - bash
             - -c
-            - 'n=$(date +"%s") && t=$(mysql ApplianceDB -e "SELECT value FROM ApplianceConfiguration WHERE name = \"last_sync_time\"" -sN | date "+%s" -f -) && d=$((n-t)) && echo "$d" && [ "$d" -le "600" ]'
+            - '. /root/k8s_integration.sh && d=$(time_since_sync) && [ "$d" -le "600" ]'
           initialDelaySeconds: 600
           failureThreshold: 2
           periodSeconds: 30
