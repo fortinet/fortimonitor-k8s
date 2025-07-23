@@ -36,6 +36,9 @@ kubeStateMetrics:
   install: true
 
 topNNamespaces: 0
+filterNamespaces:
+  include: []
+  exclude: []
 
 onsightImage:
   repository: panopta/onsight-collector
