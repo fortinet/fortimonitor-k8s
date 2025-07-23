@@ -37,6 +37,11 @@ kubeStateMetrics:
 
 topNNamespaces: 0
 
+onsightImage:
+  repository: panopta/onsight-collector
+  tag: 2023.2.06
+  pullPolicy: Always
+
 onsightRequests:
   cpu: ""
   memory: ""
@@ -45,10 +50,19 @@ onsightRequests:
 onsightVolume:
   size: "50Gi"
 
-onsightImage:
-  repository: panopta/onsight-collector
-  tag: 2023.2.06
-  pullPolicy: Always
+# If you are using NodeSelector, you should use StorageClass with volumeBindingMode: WaitForFirstConsumer
+# See for additional info https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode
+onsightNodeSelector: {}
+
+onsightStorageClass:
+  enabled: false
+  annotations: {}
+  labels: {}
+  parameters: {}
+  allowVolumeExpansion: true
+  provisioner: ""
+  reclaimPolicy: Delete
+  volumeBindingMode: ""
 
 agentImage:
   repository: panopta/agent
@@ -79,17 +93,3 @@ kube-state-metrics:
     - kube_node_status_condition
     - kube_persistentvolumeclaim_annotations
     - kube_persistentvolumeclaim_status_phase
-
-# If you are using NodeSelector, you should use StorageClass with volumeBindingMode: WaitForFirstConsumer
-# See for additional info https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode
-onsightNodeSelector: {}
-
-onsightStorageClass:
-  enabled: false
-  annotations: {}
-  labels: {}
-  parameters: {}
-  allowVolumeExpansion: true
-  provisioner: ""
-  reclaimPolicy: Delete
-  volumeBindingMode: ""
