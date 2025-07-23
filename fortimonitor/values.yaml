@@ -63,6 +63,7 @@ kube-state-metrics:
   fullnameOverride: fortimonitor-kube-state-metrics
   extraArgs:
     - "--enable-gzip-encoding"
+    - "--metric-annotations-allowlist=persistentvolumeclaims=[volume.kubernetes.io/selected-node]"
   metricAllowlist:
     - kube_pod_container_resource_requests
     - kube_node_status_allocatable
@@ -72,8 +73,12 @@ kube-state-metrics:
     - kube_pod_container_status_waiting_reason
     - kube_pod_container_status_terminated_reason
     - kube_pod_container_status_last_terminated_reason
+    - kube_pod_status_phase
+    - kube_pod_status_ready
     - kube_node_spec_unschedulable
     - kube_node_status_condition
+    - kube_persistentvolumeclaim_annotations
+    - kube_persistentvolumeclaim_status_phase
 
 # If you are using NodeSelector, you should use StorageClass with volumeBindingMode: WaitForFirstConsumer
 # See for additional info https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode
