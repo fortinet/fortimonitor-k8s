@@ -39,10 +39,18 @@ spec:
     spec:
       tolerations:
         {{- toYaml $.Values.podTolerations.onsight | nindent 8 }}
+{{- if .Values.onsightSecurityContext.pod }}
+      securityContext:
+{{ toYaml .Values.onsightSecurityContext.pod | indent 8 }}
+{{- end }}
       initContainers:
       - image: "{{ .Values.onsightImage.repository }}:{{ .Values.onsightImage.tag }}"
         imagePullPolicy: {{ .Values.onsightImage.pullPolicy }}
         name: "init-onsight"
+{{- if .Values.onsightSecurityContext.container }}
+        securityContext:
+{{ toYaml .Values.onsightSecurityContext.container | indent 10 }}
+{{- end }}
         volumeMounts:
         - name: {{ .Chart.Name }}-onsight-pv
           mountPath: /persistent/
@@ -51,6 +59,10 @@ spec:
       - image: "{{ .Values.onsightImage.repository }}:{{ .Values.onsightImage.tag }}"
         imagePullPolicy: {{ .Values.onsightImage.pullPolicy }}
         name: {{ .Chart.Name }}-onsight
+{{- if .Values.onsightSecurityContext.container }}
+        securityContext:
+{{ toYaml .Values.onsightSecurityContext.container | indent 10 }}
+{{- end }}
         volumeMounts:
         - name: {{ .Chart.Name }}-onsight-pv
           mountPath: /persistent/

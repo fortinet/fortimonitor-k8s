@@ -67,6 +67,14 @@ onsightStorageClass:
   reclaimPolicy: Delete
   volumeBindingMode: ""
 
+onsightSecurityContext:
+  pod:
+    runAsNonRoot: false
+    seccompProfile:
+      type: RuntimeDefault
+  container:
+    allowPrivilegeEscalation: true
+
 agentImage:
   repository: panopta/agent
   tag: kubernetes-2024.4.5
