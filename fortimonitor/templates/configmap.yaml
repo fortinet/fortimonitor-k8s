@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Chart.Name }}-configmap
+  name: {{ .Chart.Name }}
 data:
   CUSTOMER_KEY: {{ quote .Values.customer_key }}
   CLUSTER_NAME: {{ quote .Values.clusterName }}

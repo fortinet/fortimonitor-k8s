@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ .Chart.Name }}-onsight-pv-claim
+  name: {{ .Chart.Name }}-onsight
   labels:
     app: {{ .Chart.Name }}-onsight
 spec:
@@ -73,7 +73,7 @@ spec:
           mountPath: "/etc/fm-k8s"
         envFrom:
         - configMapRef:
-            name: {{ .Chart.Name }}-configmap
+            name: {{ .Chart.Name }}
         resources:
           {{- $size := .Values.size }}
           requests:
@@ -126,16 +126,16 @@ spec:
       volumes:
       - name: {{ .Chart.Name }}-onsight-pv
         persistentVolumeClaim:
-          claimName: {{ .Chart.Name }}-onsight-pv-claim
+          claimName: {{ .Chart.Name }}-onsight
       - name: {{ .Chart.Name }}-secret
         secret:
-          secretName: {{ .Chart.Name }}-secret
+          secretName: {{ .Chart.Name }}
       hostAliases:
         - hostnames:
             - "onsight-collector"
             - "onsight-collector.onsight"
           ip: "127.0.0.1"
-      serviceAccountName: {{ .Chart.Name }}-serviceaccount
+      serviceAccountName: {{ .Chart.Name }}
       {{- with .Values.onsightNodeSelector }}
       nodeSelector: {{ toYaml . | nindent 8 }}
       {{- end }}
