@@ -19,7 +19,7 @@ You can also override any individual request using `--set onsightRequests.<resou
 **Note:** See above for determining `size`. The default is `medium`.
 **Note:** If your cluster already has `metrics-server` installed, you can disable its installation (described below).
 1. Add this Helm repo using `helm repo add fortimonitor https://panopta.github.io/kubernetes/repo`
-2. Install FortiMonitor using `helm install --set customer_key=<your-customer-key> --set size=<size> <name-of-release> panopta/fortimonitor`
+2. Install FortiMonitor using `helm install --set customerKey=<your-customer-key> --set size=<size> <name-of-release> panopta/fortimonitor`
 
 In a few minutes, your cluster should show up in the FortiMonitor control panel.
 
@@ -34,7 +34,7 @@ You can also specify such options in a YAML-formatted `values.yaml` file which y
 
 | Key Name                  | Default                                    | Description                                                                                                              |
 |---------------------------|--------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
-| customer_key              | None (Required)                            | Your FortiMonitor customer key                                                                                                |
+| customerKey               | None (Required)                            | Your FortiMonitor customer key                                                                                                |
 | size                      | medium                                     | Size of the cluster you are deploying to                                                                                 |
 | clusterName               | Kubernetes Cluster                         | The name of this cluster as it will show up in the controlpanel                                                          |
 | metricsServer.install     | true                                       | Whether to install metrics-server as part of the deployment. Set to `false` if it's already installed.                   |
@@ -42,7 +42,7 @@ You can also specify such options in a YAML-formatted `values.yaml` file which y
 | onsightRequests.cpu       | None                                       | Requested CPU for the FortiMonitor OnSight                                                                                    |
 | onsightRequests.memory    | None                                       | Requested Memory for the FortiMonitor OnSight                                                                                 |
 | onsightRequests.ephemeral | None                                       | Requested Ephemeral Storage for the FortiMonitor OnSight                                                                      |
-| agent_config              | None                                       | Any additional blocks of configuration to deploy onto the nodes' agents                                                  |
+| agentConfig               | None                                       | Any additional blocks of configuration to deploy onto the nodes' agents                                                  |
 
 ## Upgrading FortiMonitor
 1. Fetch new charts using `helm repo update`

@@ -7,12 +7,12 @@
 size: medium
 
 # Your FortiMonitor customer key
-customer_key: your-customer-key-123
+customerKey: your-customer-key-123
 
 # Name of the cluster as it will show in the controlpanel
 clusterName: "Kubernetes Cluster"
 
-agent_config: ""
+agentConfig: ""
 # Replace the above line with a block like below
 # to specifiy additional configuration options
 # to be deployed on each node's FortiMonitor agent
@@ -30,7 +30,7 @@ agent:
 
 mediatorUrl: ""
 
-aggregator_url: ""
+aggregatorUrl: ""
 
 kubeStateMetrics:
   install: true
