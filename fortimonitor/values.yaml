@@ -7,12 +7,12 @@
 size: medium
 
 # Your FortiMonitor customer key
-customer_key: your-customer-key-123
+customerKey: your-customer-key-123
 
 # Name of the cluster as it will show in the controlpanel
 clusterName: "Kubernetes Cluster"
 
-agent_config: ""
+agentConfig: ""
 # Replace the above line with a block like below
 # to specifiy additional configuration options
 # to be deployed on each node's FortiMonitor agent
@@ -25,59 +25,33 @@ agent_config: ""
 #   foo=bar
 
 agent:
+  install: false
   nodeSelector: {}
 
 mediatorUrl: ""
 
-aggregator_url: ""
+aggregatorUrl: ""
 
 kubeStateMetrics:
   install: true
 
-metricsServer:
-  install: true
-
 topNNamespaces: 0
+filterNamespaces:
+  include: []
+  exclude: []
+
+onsightImage:
+  repository: panopta/onsight-collector
+  tag: k8s-1.3.0-alpha.1
+  pullPolicy: Always
 
 onsightRequests:
   cpu: ""
   memory: ""
   ephemeral: ""
 
-onsightImage:
-  repository: panopta/onsight-collector
-  tag: 2023.2.06
-  pullPolicy: Always
-
-agentImage:
-  repository: panopta/agent
-  tag: kubernetes-2024.4.5
-  pullPolicy: Always
-
-podTolerations:
-  agent: []
-  onsight: []
-
-kube-state-metrics:
-  fullnameOverride: fortimonitor-kube-state-metrics
-  extraArgs:
-    - "--enable-gzip-encoding"
-  metricAllowlist:
-    - kube_pod_container_resource_requests
-    - kube_node_status_allocatable
-    - kube_pod_info
-    - kube_pod_container_status_restarts
-    - kube_pod_container_status_restarts_total
-    - kube_pod_container_status_waiting_reason
-    - kube_pod_container_status_terminated_reason
-    - kube_pod_container_status_last_terminated_reason
-    - kube_node_spec_unschedulable
-    - kube_node_status_condition
-
-metrics-server:
-  apiService:
-    create: true
-    # extraArgs: ['--kubelet-preferred-address-types', 'InternalIP,Hostname,InternalDNS,ExternalDNS,ExternalIP']
+onsightVolume:
+  size: "50Gi"
 
 # If you are using NodeSelector, you should use StorageClass with volumeBindingMode: WaitForFirstConsumer
 # See for additional info https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode
@@ -92,3 +66,41 @@ onsightStorageClass:
   provisioner: ""
   reclaimPolicy: Delete
   volumeBindingMode: ""
+
+onsightSecurityContext:
+  pod:
+    runAsNonRoot: false
+    seccompProfile:
+      type: RuntimeDefault
+  container:
+    allowPrivilegeEscalation: true
+
+agentImage:
+  repository: panopta/agent
+  tag: kubernetes-2024.4.5
+  pullPolicy: Always
+
+podTolerations:
+  agent: []
+  onsight: []
+
+kube-state-metrics:
+  fullnameOverride: fortimonitor-kube-state-metrics
+  extraArgs:
+    - "--enable-gzip-encoding"
+    - "--metric-annotations-allowlist=persistentvolumeclaims=[volume.kubernetes.io/selected-node]"
+  metricAllowlist:
+    - kube_pod_container_resource_requests
+    - kube_node_status_allocatable
+    - kube_pod_info
+    - kube_pod_container_status_restarts
+    - kube_pod_container_status_restarts_total
+    - kube_pod_container_status_waiting_reason
+    - kube_pod_container_status_terminated_reason
+    - kube_pod_container_status_last_terminated_reason
+    - kube_pod_status_phase
+    - kube_pod_status_ready
+    - kube_node_spec_unschedulable
+    - kube_node_status_condition
+    - kube_persistentvolumeclaim_annotations
+    - kube_persistentvolumeclaim_status_phase

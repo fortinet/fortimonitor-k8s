@@ -1,13 +1,14 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Chart.Name }}-configmap
+  name: {{ .Chart.Name }}
 data:
-  CUSTOMER_KEY: {{ quote .Values.customer_key }}
+  CUSTOMER_KEY: {{ quote .Values.customerKey }}
   CLUSTER_NAME: {{ quote .Values.clusterName }}
   FM_MEDIATOR_URL: {{ quote .Values.mediatorUrl }}
-  AGGREGATOR_URL: {{ quote .Values.aggregator_url }}
-  AGENT_CONFIG: {{ quote .Values.agent_config | replace "\\n" "\\\\n" }}
+  AGGREGATOR_URL: {{ quote .Values.aggregatorUrl }}
+  AGENT_CONFIG: {{ quote .Values.agentConfig | replace "\\n" "\\\\n" }}
   TOP_N_NAMESPACES: {{ quote .Values.topNNamespaces }}
   PANOPTA_NAMESPACE: {{ quote .Release.Namespace }}
-  KUBE_STATE_ENDPOINT: "http://{{ .Release.Name }}-kube-state-metrics.{{ .Release.Namespace }}.svc:8080"
+  KUBE_STATE_ENDPOINT: "http://{{ .Chart.Name }}-kube-state-metrics.{{ .Release.Namespace }}.svc:8080"
+  FM_CHART_VERSION: {{ quote .Chart.Version }}

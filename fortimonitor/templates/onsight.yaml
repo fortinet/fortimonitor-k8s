@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ .Chart.Name }}-onsight-pv-claim
+  name: {{ .Chart.Name }}-onsight
   labels:
     app: {{ .Chart.Name }}-onsight
 spec:
@@ -9,27 +9,26 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
+      storage: {{ .Values.onsightVolume.size }}
   {{- if .Values.onsightStorageClass.enabled }}
   storageClassName: {{ .Chart.Name }}-onsight
   {{- end }}
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ .Chart.Name }}-onsight
   labels:
-    app: {{ .Chart.Name }}-osight
+    app: {{ .Chart.Name }}-onsight
     app.kubernetes.io/name: {{ include "fortimonitor.name" . }}
     helm.sh/chart: {{ include "fortimonitor.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
+  serviceName: "{{ .Chart.Name }}-onsight"
   selector:
      matchLabels:
         app: {{ .Chart.Name }}-onsight
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
@@ -40,18 +39,41 @@ spec:
     spec:
       tolerations:
         {{- toYaml $.Values.podTolerations.onsight | nindent 8 }}
+{{- if .Values.onsightSecurityContext.pod }}
+      securityContext:
+{{ toYaml .Values.onsightSecurityContext.pod | indent 8 }}
+{{- end }}
+      initContainers:
+      - image: "{{ .Values.onsightImage.repository }}:{{ .Values.onsightImage.tag }}"
+        imagePullPolicy: {{ .Values.onsightImage.pullPolicy }}
+        name: "init-onsight"
+{{- if .Values.onsightSecurityContext.container }}
+        securityContext:
+{{ toYaml .Values.onsightSecurityContext.container | indent 10 }}
+{{- end }}
+        volumeMounts:
+        - name: {{ .Chart.Name }}-onsight-pv
+          mountPath: /persistent/
+        command: ['sudo', '/usr/bin/bash', '-c', "source /root/k8s_integration.sh && init_k8s_appliancedb"]
       containers:
       - image: "{{ .Values.onsightImage.repository }}:{{ .Values.onsightImage.tag }}"
         imagePullPolicy: {{ .Values.onsightImage.pullPolicy }}
         name: {{ .Chart.Name }}-onsight
+{{- if .Values.onsightSecurityContext.container }}
+        securityContext:
+{{ toYaml .Values.onsightSecurityContext.container | indent 10 }}
+{{- end }}
         volumeMounts:
         - name: {{ .Chart.Name }}-onsight-pv
           mountPath: /persistent/
+        - name: {{ .Chart.Name }}-onsight-pv
+          subPath: mysql
+          mountPath: /var/lib/mysql
         - name: {{ .Chart.Name }}-secret
           mountPath: "/etc/fm-k8s"
         envFrom:
         - configMapRef:
-            name: {{ .Chart.Name }}-configmap
+            name: {{ .Chart.Name }}
         resources:
           {{- $size := .Values.size }}
           requests:
@@ -97,23 +119,23 @@ spec:
             command:
             - bash
             - -c
-            - 'n=$(date +"%s") && t=$(mysql ApplianceDB -e "SELECT value FROM ApplianceConfiguration WHERE name = \"last_sync_time\"" -sN | date "+%s" -f -) && d=$((n-t)) && echo "$d" && [ "$d" -le "600" ]'
+            - '. /root/k8s_integration.sh && d=$(time_since_sync) && [ "$d" -le "600" ]'
           initialDelaySeconds: 600
           failureThreshold: 2
           periodSeconds: 30
       volumes:
       - name: {{ .Chart.Name }}-onsight-pv
         persistentVolumeClaim:
-          claimName: {{ .Chart.Name }}-onsight-pv-claim
+          claimName: {{ .Chart.Name }}-onsight
       - name: {{ .Chart.Name }}-secret
         secret:
-          secretName: {{ .Chart.Name }}-secret
+          secretName: {{ .Chart.Name }}
       hostAliases:
         - hostnames:
             - "onsight-collector"
             - "onsight-collector.onsight"
           ip: "127.0.0.1"
-      serviceAccountName: {{ .Chart.Name }}-serviceaccount
+      serviceAccountName: {{ .Chart.Name }}
       {{- with .Values.onsightNodeSelector }}
       nodeSelector: {{ toYaml . | nindent 8 }}
       {{- end }}
