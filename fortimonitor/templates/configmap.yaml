@@ -4,6 +4,7 @@ metadata:
   name: {{ .Chart.Name }}
 data:
   CUSTOMER_KEY: {{ quote .Values.customerKey }}
+  APPLIANCE_KEY: {{ quote .Values.onsightKey }}
   CLUSTER_NAME: {{ quote .Values.clusterName }}
   FM_MEDIATOR_URL: {{ quote .Values.mediatorUrl }}
   AGGREGATOR_URL: {{ quote .Values.aggregatorUrl }}

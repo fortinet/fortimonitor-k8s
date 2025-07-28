@@ -8,6 +8,7 @@ size: medium
 
 # Your FortiMonitor customer key
 customerKey: your-customer-key-123
+onsightKey: ""
 
 # Name of the cluster as it will show in the controlpanel
 clusterName: "Kubernetes Cluster"
