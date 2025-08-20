@@ -1,0 +1,8 @@
+title: "FortiMonitor Kubernetes Integration"
+repository: fortinet/fortimonitor-k8s
+exclude: ["README.md", "**/README.md"]
+incremental: false
+theme: minima
+minima:
+  skin: dark
+header_pages: []
