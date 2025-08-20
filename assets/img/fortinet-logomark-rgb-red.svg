@@ -1,3 +1,9 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:e078268570d9cd5f95e4f9474f97123567059acdbafcf027a31f09b95eeabb9d
-size 832
+<?xml version="1.0"?>
+<svg width="76" height="53" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" version="1.1" xml:space="preserve">
+ <style type="text/css">.st0{fill:none;}
+	.st1{fill:#DA291C;}</style>
+ <g class="layer" display="inline">
+  <title>Layer 1</title>
+  <path class="st1" d="m76.4,19.8l0,13.8l0,0l-21.5,0l0,-13.8l0,0l21.5,0l0,0l0,0zm-48.9,33.5l0,0l21.5,0l0,0l0,-13.8l-21.5,0l0,13.8zm48.9,-41.7c0,-6.4 -5.2,-11.6 -11.6,-11.6l-9.9,0l0,13.8l21.5,0l0,-2.2zm-48.9,-11.6l0,13.8l0,0l21.5,0l0,0l0,-13.8l0,0l-21.5,0l0,0zm-27.5,19.8l0,0l0,13.8l0,0l21.5,0l0,-13.8l0,0l-21.5,0l0,0zm54.9,33.5l9.9,0c6.4,0 11.6,-5.2 11.6,-11.6l0,-2.2l-21.5,0l0,13.8zm-54.9,-11.6c0,6.4 5.2,11.6 11.6,11.6l9.9,0l0,-13.8l-21.5,0l0,2.2zm0,-30.1l0,2.2l21.5,0l0,-13.8l-9.9,0c-6.4,0 -11.6,5.2 -11.6,11.6z" id="svg_2"/>
+ </g>
+</svg>
