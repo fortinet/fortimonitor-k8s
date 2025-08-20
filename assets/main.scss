@@ -1,0 +1,19 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+@import "minima";
+
+.home .page-heading {
+  display: none;
+}
+
+.wrapper {
+  max-width: 60%;
+}
+
+.site-logo {
+  float: left;
+  padding-top: 10px;
+  margin-right: 10px;
+}
