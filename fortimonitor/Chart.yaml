@@ -1,8 +1,8 @@
 apiVersion: v2
 description: Helm chart for deploying FortiMonitor's Kubernetes monitoring infrastructure
 name: fortimonitor
-version: 0.1.1
-appVersion: k8s-0.1.1
+version: 0.1.2
+appVersion: k8s-2025.3.02
 dependencies:
   - name: kube-state-metrics
     version: 6.1.*

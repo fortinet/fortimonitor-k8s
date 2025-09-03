@@ -56,7 +56,7 @@ spec:
           mountPath: /persistent/
         command: ['sudo', '/usr/bin/bash', '-c', "source /root/k8s_integration.sh && init_k8s_appliancedb"]
       containers:
-      - image: "{{ .Values.onsightImage.repository }}:{{ .Values.onsightImage.tag }}"
+      - image: "{{ .Values.onsightImage.repository }}:{{ .Values.onsightImage.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.onsightImage.pullPolicy }}
         name: {{ .Chart.Name }}-onsight
 {{- if .Values.onsightSecurityContext.container }}
