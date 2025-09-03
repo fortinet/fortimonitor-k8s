@@ -43,7 +43,7 @@ filterNamespaces:
 
 onsightImage:
   repository: panopta/onsight-collector
-  tag: k8s-0.1.0-alpha.1
+  tag: ""
   pullPolicy: Always
 
 onsightRequests:
