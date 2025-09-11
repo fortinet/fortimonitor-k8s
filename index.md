@@ -40,7 +40,7 @@ You can also override any individual resource requests via values. See [Configur
 Before proceeding, check the [Provider-specific Instructions](#provider-instructions) section for any specifics required
 for certain cluster providers.
 
-1. Add this Helm repo using `helm repo add fortimonitor https://fortimonitor.github.io/fortimonitor-k8s/repo`
+1. Add this Helm repo using `helm repo add fortimonitor https://fortinet.github.io/fortimonitor-k8s/repo`
 2. Switch to the desired Kubernetes namespace for the installation
 3. Install FortiMonitor using `helm install -g --set customerKey=<your-customer-key> --set size=<size> fortimonitor/fortimonitor`
   a. You can specify a name for this cluster by also adding `--set clusterName=<name>` to the above command or your values.yaml
