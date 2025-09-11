@@ -12,6 +12,8 @@ spec:
       storage: {{ .Values.onsightVolume.size }}
   {{- if .Values.onsightStorageClass.enabled }}
   storageClassName: {{ .Chart.Name }}-onsight
+  {{- else if .Values.onsightVolume.storageClassName }}
+  storageClassName: {{ .Values.onsightVolume.storageClassName }}
   {{- end }}
 ---
 apiVersion: apps/v1
