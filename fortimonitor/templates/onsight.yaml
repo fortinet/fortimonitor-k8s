@@ -71,6 +71,9 @@ spec:
         - name: {{ .Chart.Name }}-onsight-pv
           subPath: mysql
           mountPath: /var/lib/mysql
+        - name: {{ .Chart.Name }}-onsight-pv
+          subPath: logs
+          mountPath: /var/log/
         - name: {{ .Chart.Name }}-secret
           mountPath: "/etc/fm-k8s"
         envFrom:
