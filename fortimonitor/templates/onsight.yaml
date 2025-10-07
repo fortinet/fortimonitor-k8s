@@ -105,11 +105,11 @@ spec:
             {{- if .Values.onsightRequests.ephemeral }}
             ephemeral-storage: "{{ .Values.onsightRequests.ephemeral }}"
             {{- else if eq $size "small" }}
-            ephemeral-storage: "10Gi"
+            ephemeral-storage: "1Gi"
             {{- else if eq $size "medium" }}
-            ephemeral-storage: "20Gi"
+            ephemeral-storage: "2Gi"
             {{- else if eq $size "large" }}
-            ephemeral-storage: "50Gi"
+            ephemeral-storage: "5Gi"
             {{- end }}
           limits:
             {{- if .Values.onsightRequests.ephemeral }}
