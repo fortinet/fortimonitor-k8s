@@ -112,14 +112,8 @@ spec:
             ephemeral-storage: "5Gi"
             {{- end }}
           limits:
-            {{- if .Values.onsightRequests.ephemeral }}
-            ephemeral-storage: "{{ .Values.onsightRequests.ephemeral }}"
-            {{- else if eq $size "small" }}
-            ephemeral-storage: "10Gi"
-            {{- else if eq $size "medium" }}
-            ephemeral-storage: "20Gi"
-            {{- else if eq $size "large" }}
-            ephemeral-storage: "50Gi"
+            {{- if .Values.onsightLimits.ephemeral }}
+            ephemeral-storage: "{{ .Values.onsightLimits.ephemeral }}"
             {{- end }}
         livenessProbe:
           exec:

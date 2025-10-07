@@ -51,6 +51,11 @@ onsightRequests:
   memory: ""
   ephemeral: ""
 
+onsightLimits:
+  cpu: ""
+  memory: ""
+  ephemeral: ""
+
 onsightVolume:
   size: "50Gi"
   storageClassName: ""
