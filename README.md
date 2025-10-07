@@ -11,9 +11,9 @@ You can also override any individual request using `--set onsightRequests.<resou
 
 | Size               | Suggested # of Pods   | Requested OnSight CPUs | Requested OnSight Memory | Requested OnSight Ephemeral Storage |
 |--------------------|-----------------------|------------------------|--------------------------|-------------------------------------|
-| small              | < 500                 | 1.0                    | 1Gi                      | 10Gi                                |
-| medium             | 500-2000              | 2.0                    | 2Gi                      | 20Gi                                |
-| large              | >2000                 | 3.0                    | 3Gi                      | 50Gi                                |
+| small              | < 500                 | 1.0                    | 1Gi                      | 1Gi                                 |
+| medium             | 500-2000              | 2.0                    | 2Gi                      | 2Gi                                 |
+| large              | >2000                 | 3.0                    | 3Gi                      | 5Gi                                 |
 
 ## Deploying FortiMonitor
 **Note:** See above for determining `size`. The default is `medium`.
@@ -34,14 +34,15 @@ You can also specify such options in a YAML-formatted `values.yaml` file which y
 
 | Key Name                  | Default                                    | Description                                                                                                              |
 |---------------------------|--------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
-| customer_key              | None (Required)                            | Your FortiMonitor customer key                                                                                                |
+| customer_key              | None (Required)                            | Your FortiMonitor customer key                                                                                           |
 | size                      | medium                                     | Size of the cluster you are deploying to                                                                                 |
 | clusterName               | Kubernetes Cluster                         | The name of this cluster as it will show up in the controlpanel                                                          |
 | metricsServer.install     | true                                       | Whether to install metrics-server as part of the deployment. Set to `false` if it's already installed.                   |
 | topNNamespaces            | 0                                          | Number of namespaces to pull in, ordered by number of pods. 0 to include all.                                            |
-| onsightRequests.cpu       | None                                       | Requested CPU for the FortiMonitor OnSight                                                                                    |
-| onsightRequests.memory    | None                                       | Requested Memory for the FortiMonitor OnSight                                                                                 |
-| onsightRequests.ephemeral | None                                       | Requested Ephemeral Storage for the FortiMonitor OnSight                                                                      |
+| onsightRequests.cpu       | None                                       | Requested CPU for the FortiMonitor OnSight                                                                               |
+| onsightRequests.memory    | None                                       | Requested Memory for the FortiMonitor OnSight                                                                            |
+| onsightRequests.ephemeral | None                                       | Requested Ephemeral Storage for the FortiMonitor OnSight                                                                 |
+| aggregatorUrl             | None                                       | If specified, overrides the default aggregator endpoint the OnSight Pod will sync to.                                    |
 | agent_config              | None                                       | Any additional blocks of configuration to deploy onto the nodes' agents                                                  |
 
 ## Upgrading FortiMonitor
@@ -52,3 +53,6 @@ You can also specify such options in a YAML-formatted `values.yaml` file which y
 Run `helm uninstall <release_name>`
 
 You can find the name of the release with `helm ls`
+
+The uninstall process will not delete the OnSight PVC to prevent accidental loss of data.
+If you are certain you wish to remove it, you can use `kubectl delete pvc <pvc-name>` after the Helm uninstall.
