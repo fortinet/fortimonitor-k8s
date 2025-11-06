@@ -111,3 +111,4 @@ kube-state-metrics:
     - kube_node_status_condition
     - kube_persistentvolumeclaim_annotations
     - kube_persistentvolumeclaim_status_phase
+    - kube_replicaset_owner
