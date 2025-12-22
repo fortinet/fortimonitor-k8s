@@ -112,3 +112,4 @@ kube-state-metrics:
     - kube_persistentvolumeclaim_annotations
     - kube_persistentvolumeclaim_status_phase
     - kube_replicaset_owner
+    - kube_endpointslice_endpoints
