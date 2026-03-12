@@ -2,6 +2,20 @@ apiVersion: v1
 entries:
   fortimonitor:
   - apiVersion: v2
+    appVersion: k8s-2026.1.05-beta.2
+    created: "2026-03-12T10:40:58.54490713-05:00"
+    dependencies:
+    - condition: kubeStateMetrics.install
+      name: kube-state-metrics
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 6.1.*
+    description: Helm chart for deploying FortiMonitor's Kubernetes monitoring infrastructure
+    digest: fa155dd90d091bdd82db138b05c38b0c453800aabb3fe6dc984ce3c6c73b4593
+    name: fortimonitor
+    urls:
+    - https://fortinet.github.io/fortimonitor-k8s/repo/fortimonitor-0.2.0-beta.2.tgz
+    version: 0.2.0-beta.2
+  - apiVersion: v2
     appVersion: k8s-2026.1.05-beta.1
     created: "2026-03-05T15:52:11.051073519-06:00"
     dependencies:
